@@ -18,7 +18,7 @@
           }) }}</p>
         <p>{{ item.hours }}</p>
 
-        <p class="remove-button" @click="store.methods.removeHours(store.state.days, index)">X</p>
+        <p class="remove-button" @click="store.methods.removeHours(store.state.days, index, store.day.date)">X</p>
       </li>
     </ul>
   </div>

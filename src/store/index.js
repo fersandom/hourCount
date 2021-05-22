@@ -7,12 +7,14 @@ import { ref, reactive } from "vue";
 const state = reactive({
   days: [],
   filteredMonth: [],
-  selectedMonth: Number,
 });
 
 //Por ref
 const hourCounter = ref(0);
 const totalMoney = ref(0);
+const day = ref({
+      
+});
 
 const methods = {
   loadCookie() {
@@ -68,9 +70,9 @@ const methods = {
     console.log(hourCounter.value);
   },
 
-  removeHours(array, index) {
-    state.filteredMonth = array.splice(index, 1);
-    this.totalHours(state.filteredMonth);
+  removeHours(array, index, date) {
+    array.splice(index, 1);
+    this.filterByMonth(date);
 
     this.saveCookie();
     console.log(state.days);
@@ -82,5 +84,6 @@ export default {
   state,
   hourCounter,
   totalMoney,
+  day,
   methods,
 };

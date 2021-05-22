@@ -4,15 +4,15 @@
       <div class="form-content">
         <div class="date-container">
           <label>Date</label>
-          <input v-model="day.date" class="input-date" type="date" @change="store.methods.filterByMonth(day.date)" />
+          <input v-model="store.day.date" class="input-date" type="date" @change="store.methods.filterByMonth(store.day.date)" />
         </div>
         <div class="hour-container">
           <label>Nº of Hours</label>
-          <input v-model="day.hours" class="input-hour" type="number" />
+          <input v-model="store.day.hours" class="input-hour" type="number" />
         </div>
       </div>
       <button
-        @click.prevent="store.methods.submitDay(day.date, Number(day.hours))"
+        @click.prevent="store.methods.submitDay(store.day.date, Number(store.day.hours))"
         class="submit-button"
       >
         Add
@@ -22,18 +22,15 @@
 </template>
 
 <script>
-import { ref, inject } from "vue";
+import { inject } from "vue";
 
 export default {
   setup() {
     const store = inject("store");
 
-    let day = ref({
-      
-    });
+    
 
     return {
-      day,
       store,
     };
   },
