@@ -15,17 +15,18 @@ const hourCounter = ref(0);
 const totalMoney = ref(0);
 
 const methods = {
-
-  loadCookie(){
+  loadCookie() {
     const loadArray = JSON.parse(localStorage.getItem("hours"));
-    loadArray.forEach(element => {
+    loadArray.forEach((element) => {
       element.myDate.toString();
-      element.myDate = new Date
-      
+      element.myDate = new Date(element.myDate);
     });
     console.log(loadArray);
     state.days = [...loadArray];
-    
+  },
+
+  saveCookie() {
+    localStorage.setItem("hours", JSON.stringify(state.days));
   },
 
   submitDay(date, hours) {
@@ -38,6 +39,7 @@ const methods = {
       hours,
     };
     state.days.push(newDay);
+    this.filterByMonth(date);
     console.log(state.days);
   },
 
@@ -54,11 +56,8 @@ const methods = {
 
     this.totalHours(state.filteredMonth);
     console.log(state.filteredMonth);
-    localStorage.setItem("hours", JSON.stringify(state.days))
-
+    this.saveCookie();
   },
-
-  
 
   totalHours(array) {
     hourCounter.value = 0;
@@ -67,6 +66,14 @@ const methods = {
     });
     totalMoney.value = hourCounter.value * 60;
     console.log(hourCounter.value);
+  },
+
+  removeHours(array, index) {
+    state.filteredMonth = array.splice(index, 1);
+    this.totalHours(state.filteredMonth);
+
+    this.saveCookie();
+    console.log(state.days);
   },
 };
 

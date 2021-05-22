@@ -4,6 +4,7 @@
       <li class="list-item">
         <p>Date</p>
         <p>Hours</p>
+        <p>Remove</p>
       </li>
       <li
         class="list-item"
@@ -16,6 +17,8 @@
           year: "numeric"
           }) }}</p>
         <p>{{ item.hours }}</p>
+
+        <p class="remove-button" @click="store.methods.removeHours(store.state.days, index)">X</p>
       </li>
     </ul>
   </div>
@@ -51,5 +54,13 @@ export default {
   justify-content: space-between;
   font-size: 20px;
   margin-bottom: 15px;
+}
+
+.remove-button{
+  font-weight: bolder;
+}
+
+.remove-button:hover{
+  cursor: pointer;
 }
 </style>
