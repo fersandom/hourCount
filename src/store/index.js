@@ -12,9 +12,7 @@ const state = reactive({
 //Por ref
 const hourCounter = ref(0);
 const totalMoney = ref(0);
-const day = ref({
-      
-});
+const day = ref({});
 
 const methods = {
   loadCookie() {
@@ -23,7 +21,6 @@ const methods = {
       element.myDate.toString();
       element.myDate = new Date(element.myDate);
     });
-    console.log(loadArray);
     state.days = [...loadArray];
   },
 
@@ -42,7 +39,6 @@ const methods = {
     };
     state.days.push(newDay);
     this.filterByMonth(date);
-    console.log(state.days);
   },
 
   filterByMonth(date) {
@@ -56,8 +52,17 @@ const methods = {
       return date.myDate.getMonth() === monthDate;
     });
 
+    //Ordena el vector days
+    state.days.sort((a, b) => {
+      return a.myDate - b.myDate;
+    });
+
+    //Ordena el vector filtrado
+    state.filteredMonth.sort((a, b) => {
+      return a.myDate - b.myDate;
+    });
+
     this.totalHours(state.filteredMonth);
-    console.log(state.filteredMonth);
     this.saveCookie();
   },
 
@@ -67,7 +72,6 @@ const methods = {
       hourCounter.value += element.hours;
     });
     totalMoney.value = hourCounter.value * 60;
-    console.log(hourCounter.value);
   },
 
   removeHours(array, index, date) {
@@ -75,7 +79,6 @@ const methods = {
     this.filterByMonth(date);
 
     this.saveCookie();
-    console.log(state.days);
   },
 };
 
