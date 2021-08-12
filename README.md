@@ -1,5 +1,7 @@
 # hour-count
 
+A simple vue app to help keep the number of worked hours and payment. Payment is hardcoded since it was done for a specific person.
+
 ## Project setup
 ```
 npm install
